@@ -22,7 +22,7 @@ function calculateWinner(squares) {
   return null;
 }
 
-export default class Juego extends React.Component {
+export default class Juego extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -67,22 +67,11 @@ export default class Juego extends React.Component {
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
 
-    const moves = history.map((step, move) => {
-      const desc = move ?
-        'Go to move #' + move :
-        'Go to game start';
-      return (
-        <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
-        </li>
-      );
-    });
-
     let status;
     if (winner) {
       status = "Winner: " + winner;
     } else {
-      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+      status = "Turno del jugador: " + (this.state.xIsNext ? "X" : "O");
     }
 
     return (
@@ -95,7 +84,6 @@ export default class Juego extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
         </div>
       </div>
     );

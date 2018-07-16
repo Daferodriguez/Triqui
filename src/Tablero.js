@@ -3,13 +3,13 @@ import './App.css';
 
 function Square(props) {
   return (
-    <button className="square" onClick={props.onClick}>
+    <button className="casilla" onClick={props.onClick}>
       {props.value}
     </button>
   );
 }
 
-export default class Tablero extends React.Component {
+export default class Tablero extends Component {
   renderSquare(i) {
     return (
       <Square
@@ -22,17 +22,17 @@ export default class Tablero extends React.Component {
   render() {
     return (
       <div>
-        <div className="Tablero-row">
+        <div className="fila">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
           {this.renderSquare(2)}
         </div>
-        <div className="Tablero-row">
+        <div className="fila">
           {this.renderSquare(3)}
           {this.renderSquare(4)}
           {this.renderSquare(5)}
         </div>
-        <div className="Tablero-row">
+        <div className="fila">
           {this.renderSquare(6)}
           {this.renderSquare(7)}
           {this.renderSquare(8)}
