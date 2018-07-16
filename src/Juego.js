@@ -26,27 +26,27 @@ export default class Juego extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      history: [
+      historial: [
         {
           casillas: Array(9).fill(null)
         }
       ],
-      stepNumber: 0,
+      movimientos: 0,
       xIsNext: true
     };
   }
 
   handleClick(i) {
-    const history = this.state.history;
-    const current = history[history.length - 1];
-    const casillas = current.casillas;
+    const historial = this.state.historial;
+    const jugActual = historial[historial.length - 1];
+    const casillas = jugActual.casillas;
     // No se puede cambiar una vez se haya puesto un signo
     if (calcGanador(casillas) || casillas[i]) {
       return;
     }
     casillas[i] = this.state.xIsNext ? "X" : "O";
     this.setState({
-      history: history.concat([
+      historial: historial.concat([
         {
           casillas: casillas
         }
@@ -57,9 +57,9 @@ export default class Juego extends Component {
 
 
   render() {
-    const history = this.state.history;
-    const current = history[this.state.stepNumber];
-    const ganador = calcGanador(current.casillas);
+    const historial = this.state.historial;
+    const jugActual = historial[this.state.movimientos];
+    const ganador = calcGanador(jugActual.casillas);
 
     let condicionJuego;
     if (ganador) {
@@ -72,7 +72,7 @@ export default class Juego extends Component {
       <div className="App">
         <div className="App">
           <Tablero
-            casillas={current.casillas}
+            casillas={jugActual.casillas}
             onClick={i => this.handleClick(i)}
           />
         </div>
