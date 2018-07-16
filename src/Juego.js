@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Tablero from './Tablero'
 import './App.css';
 
-function ganador(casillas) {
+function calcGanador(casillas) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -40,7 +40,7 @@ export default class Juego extends Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const casillas = current.casillas.slice();
-    if (ganador(casillas) || casillas[i]) {
+    if (calcGanador(casillas) || casillas[i]) {
       return;
     }
     casillas[i] = this.state.xIsNext ? "X" : "O";
@@ -65,11 +65,11 @@ export default class Juego extends Component {
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-    const winner = ganador(current.casillas);
+    const ganador = calcGanador(current.casillas);
 
     let status;
-    if (winner) {
-      status = "Winner: " + winner;
+    if (ganador) {
+      status = "Ganador: " + ganador;
     } else {
       status = "Turno del jugador: " + (this.state.xIsNext ? "X" : "O");
     }
