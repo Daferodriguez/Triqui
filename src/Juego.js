@@ -61,11 +61,11 @@ export default class Juego extends Component {
     const current = history[this.state.stepNumber];
     const ganador = calcGanador(current.casillas);
 
-    let status;
+    let condicionJuego;
     if (ganador) {
-      status = "Ganador: " + ganador;
+      condicionJuego = "Ganador: " + ganador;
     } else {
-      status = "Turno del jugador: " + (this.state.xIsNext ? "X" : "O");
+      condicionJuego = "Turno del jugador: " + (this.state.xIsNext ? "X" : "O");
     }
 
     return (
@@ -77,7 +77,7 @@ export default class Juego extends Component {
           />
         </div>
         <div className="text">
-          <div>{status}</div>
+          <div>{condicionJuego}</div>
         </div>
       </div>
     );
