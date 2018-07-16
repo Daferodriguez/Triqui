@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Tablero from './Tablero'
 import './App.css';
 
-function calculateWinner(squares) {
+function ganador(casillas) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -15,8 +15,8 @@ function calculateWinner(squares) {
   ];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+    if (casillas[a] && casillas[a] === casillas[b] && casillas[a] === casillas[c]) {
+      return casillas[a];
     }
   }
   return null;
@@ -28,7 +28,7 @@ export default class Juego extends Component {
     this.state = {
       history: [
         {
-          squares: Array(9).fill(null)
+          casillas: Array(9).fill(null)
         }
       ],
       stepNumber: 0,
@@ -39,15 +39,15 @@ export default class Juego extends Component {
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
-    const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
+    const casillas = current.casillas.slice();
+    if (ganador(casillas) || casillas[i]) {
       return;
     }
-    squares[i] = this.state.xIsNext ? "X" : "O";
+    casillas[i] = this.state.xIsNext ? "X" : "O";
     this.setState({
       history: history.concat([
         {
-          squares: squares
+          casillas: casillas
         }
       ]),
       stepNumber: history.length,
@@ -65,7 +65,7 @@ export default class Juego extends Component {
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.squares);
+    const winner = ganador(current.casillas);
 
     let status;
     if (winner) {
@@ -75,14 +75,14 @@ export default class Juego extends Component {
     }
 
     return (
-      <div className="game">
-        <div className="game-Tablero">
+      <div className="App">
+        <div className="App">
           <Tablero
-            squares={current.squares}
+            casillas={current.casillas}
             onClick={i => this.handleClick(i)}
           />
         </div>
-        <div className="game-info">
+        <div className="text">
           <div>{status}</div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-function Square(props) {
+function Casilla(props) {
   return (
     <button className="casilla" onClick={props.onClick}>
       {props.value}
@@ -10,10 +10,10 @@ function Square(props) {
 }
 
 export default class Tablero extends Component {
-  renderSquare(i) {
+  pintarCasilla(i) {
     return (
-      <Square
-        value={this.props.squares[i]}
+      <Casilla
+        value={this.props.casillas[i]}
         onClick={() => this.props.onClick(i)}
       />
     );
@@ -23,19 +23,19 @@ export default class Tablero extends Component {
     return (
       <div>
         <div className="fila">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
+          {this.pintarCasilla(0)}
+          {this.pintarCasilla(1)}
+          {this.pintarCasilla(2)}
         </div>
         <div className="fila">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
+          {this.pintarCasilla(3)}
+          {this.pintarCasilla(4)}
+          {this.pintarCasilla(5)}
         </div>
         <div className="fila">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
+          {this.pintarCasilla(6)}
+          {this.pintarCasilla(7)}
+          {this.pintarCasilla(8)}
         </div>
       </div>
     );
