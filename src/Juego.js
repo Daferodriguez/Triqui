@@ -37,9 +37,10 @@ export default class Juego extends Component {
   }
 
   handleClick(i) {
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
+    const history = this.state.history;
     const current = history[history.length - 1];
-    const casillas = current.casillas.slice();
+    const casillas = current.casillas;
+    // No se puede cambiar una vez se haya puesto un signo
     if (calcGanador(casillas) || casillas[i]) {
       return;
     }
@@ -50,17 +51,10 @@ export default class Juego extends Component {
           casillas: casillas
         }
       ]),
-      stepNumber: history.length,
       xIsNext: !this.state.xIsNext
     });
   }
 
-  jumpTo(step) {
-    this.setState({
-      stepNumber: step,
-      xIsNext: (step % 2) === 0
-    });
-  }
 
   render() {
     const history = this.state.history;
