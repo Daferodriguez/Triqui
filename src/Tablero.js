@@ -1,48 +1,43 @@
 import React, { Component } from 'react';
 import './App.css';
-import Casilla from './Casilla';
 
-export default class Tablero extends Component{
+function Square(props) {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
+}
 
-  constructor(props){
-    super(props);
-    this.state = {
-      jug: "X",
-      flag: true,
-    }
+export default class Tablero extends React.Component {
+  renderSquare(i) {
+    return (
+      <Square
+        value={this.props.squares[i]}
+        onClick={() => this.props.onClick(i)}
+      />
+    );
   }
 
-  playerCallback = (jugad) => {
-    this.setState((state) => ({jug: jugad}));
-  }
-
-  pintarCasilla(i){
-    return <Casilla jugActual={this.state.jug} callBackFromTablero={this.playerCallback} indice={i}/>
-  }
-
-  render(){
-      return(
-        //El tablero completo compuesto de filas
-        <div>
-          <div className="text">Turno del jugador {this.state.jug}!</div>
-          <div className="juego">
-            <div className="fila">
-              {this.pintarCasilla(1)}
-              {this.pintarCasilla(2)}
-              {this.pintarCasilla(3)}
-            </div>
-            <div className="fila">
-              {this.pintarCasilla(4)}
-              {this.pintarCasilla(5)}
-              {this.pintarCasilla(6)}
-            </div>
-            <div className="fila">
-              {this.pintarCasilla(7)}
-              {this.pintarCasilla(8)}
-              {this.pintarCasilla(9)}
-            </div>
-          </div>
+  render() {
+    return (
+      <div>
+        <div className="Tablero-row">
+          {this.renderSquare(0)}
+          {this.renderSquare(1)}
+          {this.renderSquare(2)}
         </div>
-      )
+        <div className="Tablero-row">
+          {this.renderSquare(3)}
+          {this.renderSquare(4)}
+          {this.renderSquare(5)}
+        </div>
+        <div className="Tablero-row">
+          {this.renderSquare(6)}
+          {this.renderSquare(7)}
+          {this.renderSquare(8)}
+        </div>
+      </div>
+    );
   }
 }
