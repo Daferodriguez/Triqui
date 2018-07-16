@@ -30,8 +30,12 @@ function ganar(cuadros){
   // console.log(posicionesO)
 
   for(let i = 0; i < ganadores.length; i++){
-    for(let k = 0; k < posicionesX.length; k++){
-
+    for(let j = 0; j < 3; j++){
+      for(let k = 0; k < posicionesX.length; k++){
+        if(ganadores[i][j] === posicionesX[k]){
+          console.log("ok")
+        }
+      }
     }
   }
 
@@ -55,7 +59,6 @@ export default class Casilla extends Component{
   }
 
   handleClick(){
-
     if(this.state.valor === " " && this.props.jugActual === "X"){
       this.setState((state) => ({valor: "X", jugador: "O"}));
       cuadros.push([this.props.indice, this.state.jugador]);
@@ -64,10 +67,12 @@ export default class Casilla extends Component{
       cuadros.push([this.props.indice, this.state.jugador]);
     }
     console.log("Jugador actual: ", this.state.jugador);
-    console.log("Colocado en la celda: ", this.props.indice)
-    console.log(cuadros)
+    // console.log("Colocado en la celda: ", this.props.indice)
+    // console.log(cuadros)
     this.props.callBackFromTablero(this.state.jugador);
-    ganar(cuadros);
+    if(cuadros.length === 9){
+      ganar(cuadros);
+    }
   }
 
   render(){

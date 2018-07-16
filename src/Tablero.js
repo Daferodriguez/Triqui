@@ -7,7 +7,8 @@ export default class Tablero extends Component{
   constructor(props){
     super(props);
     this.state = {
-      jug: this.props.jugador,
+      jug: "X",
+      flag: true,
     }
   }
 
@@ -20,7 +21,6 @@ export default class Tablero extends Component{
   }
 
   render(){
-    if(this.state.jug === "X" || this.state.jug === "O"){
       return(
         //El tablero completo compuesto de filas
         <div>
@@ -44,11 +44,5 @@ export default class Tablero extends Component{
           </div>
         </div>
       )
-    }
-    return(
-      <div>
-        <div className="text">No se ha escogido jugador</div>
-      </div>
-    )
   }
 }
